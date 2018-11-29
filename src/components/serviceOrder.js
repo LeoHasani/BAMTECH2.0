@@ -1,392 +1,280 @@
 import React from 'react';
-import { View,Text,ScrollView,Alert, Button,StyleSheet,ActivityIndicator  } from "react-native";
-import webService from './webService';
-export default class serviceOrder extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      values: null,
-      isLoading: true,
-    };
-  }
-  serviceOrder(techId, UserName,password){
-    let detail = "no";
-    fetch(webService.serviceOrder, {
-      method: "POST",
-      headers: {
-        Host: "testbam.barrister.com",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body:
-      "techId=" + 
-      techId +
-      "&detail=" +
-      detail +
-      "&UserName=" +
-      UserName +
-      "&pssword=" +
-      password,
-    })
 
-    .then(response => response.json())
-    .then(responseJson => 
-      this.setState({
-        values:responseJson,
-        isLoading: true,
-      })
-      )
-      .catch(err => {
-        console.log(err);
-      })
-      .then((json)=> {
-        if(json) {
-          success(json);
-        }
-      })
-  }
-    render(){
-      let tnc=0;   
-      let mainData = this.props.navigation.getParam("page");
-      
-      let password = this.props.navigation.getParam("password");
-      this.serviceOrder(mainData.TechnicioanId, mainData.TechnicioanCode, password);
-    
-      if(this.state.isLoading){
-        return(
-          <View style={{ flex: 1, paddingTop: 20 }}>
-					<ActivityIndicator />
-				</View>
-        );
-      }
-      else{
-      return(
-          <View style={styles.container}data={this.state.values}
-          itemsPerRow={1}>
-            <ScrollView>
-               <View style={styles.cont}key={tnc++}> 
-                      <Text style={styles.wk}onPress={() => this.props.navigation.navigate("serviceOrder")}>
-                      </Text>
-                      <Text style={styles.cc}  
-                      onPress={() => this.props.navigation.navigate("serviceOrder")}
-                      style={styles.fff}>
-                      Current Distance: {item.CurrentDistance} 
-                      </Text>
-                      <Text style={styles.cc}onPress={() => this.props.navigation.navigate("serviceOrder")}
-                      style={styles.fff}>
-                      From base address: {item.Frombaseaddress} 
-                      </Text>
-               </View>
-               <View style={styles.cont}> 
-                      <Text style={styles.wk}onPress={() => this.props.navigation.navigate("serviceOrder")}
-                      style={styles.wkk}>
-                       Due Date : {item.DueDate} 
-                     </Text>
-               </View>
-                      <View style={styles.cont}>
-                      <Text style={styles.cc}
-                       onPress={() => this.props.navigation.navigate("serviceOrder")}
-                       style={styles.fff}>
-                      Service Type: {item.ServiceType} 
-                      </Text>
-                      <Text style={styles.cc}
-                      onPress={() => this.props.navigation.navigate("serviceOrder")}
-                      style={styles.fff}>
-                      Site Location: {item.SiteLocation} 
-                      </Text>  
-               </View>
-               <View style={styles.cont}>
-                      <Text style={styles.wk}onPress={() => this.props.navigation.navigate("serviceOrder")}>
-                       Work Detail : {item.WorkDetail}</Text>
-                      <Text style={styles.cc}
-                       onPress={() => this.props.navigation.navigate("serviceOrder")}
-                       style={styles.fff}>
-                       Item Code: {item.ItemCode}
-                      </Text>
-                      <Text style={styles.cc}
-                       onPress={() => this.props.navigation.navigate("serviceOrder")}
-                       style={styles.fff}>
-                       Item Name: {item.ItemName} 
-                     </Text>
-               <View style={styles.cont}>
-                      <Text style={styles.wk}onPress={() => this.props.navigation.navigate("serviceOrder")}>
-                       Work Detail : {item.WorkDetail}
-                      </Text>
-                      <Text style={styles.cc}
-                       onPress={() => this.props.navigation.navigate("serviceOrder")}
-                       style={styles.fff}>
-                       Will Parts be On Site: {item.WillPartsbeOnSite} 
-                      </Text>  
-                      <Text style={styles.cc}
-                       onPress={() => this.props.navigation.navigate("serviceOrder")}
-                       style={styles.fff}>
-                       Problem Desc: {item. ProblemDesc} </Text> 
-               </View>
-               <View style={styles.cont}>
-                      <Text style={styles.wk}onPress={() => this.props.navigation.navigate("serviceOrder")}>
-                       Work Detail : {item.WorkDetail}
-                      </Text>                 
-                      <Text style={styles.cc}
-                       onPress={() => this.props.navigation.navigate("serviceOrder")}
-                       style={styles.fff}>
-                       Parts Ordered: {item.PartsOrdered}
-                      </Text>  
-               </View>
-               <View style={styles.cont}>
-               </View>
-               </View>
-               </ScrollView>
-               <View style={styles.btt}>
-               <View style={{flexDirection: 'row',marginTop:-37}}>
-               <View style={{flex:1 , marginRight:7}} >
-                      <Button title="Accept" color="#002b80" onPress={() => {
-                          Alert.alert('You tapped the button!'); }}>
-                      </Button>
-               </View>
-               <View style={{flex:1,marginRight:7}} >
-                      <Button title="CounterRate" color="#002b80" onPress={() => {
-                           Alert.alert('You tapped the button!'); }}>
-                      </Button>
-               </View>
-               <View style={{flex:1,marginRight:2}} >
-                      <Button title="Decline"  color="#002b80"   onPress={() => {
-                           Alert.alert('You tapped the button!'); }}>
-                      </Button>
-               </View>
-               </View>
-            </View>
-        </View>
-      )
-    }
-  }
-  } 
-  const styles = StyleSheet.create({
-    container:{
-       backgroundColor: "#cceeff"
-    },
-    wk:{
-      backgroundColor: "#66ccff",
-      fontSize: 13,
-      width:305,
-      marginLeft: 20,
-      marginRight: 20,
-      paddingLeft:10,
-      paddingTop:13,
-      height:50,
-      marginTop:2,
-      color:"#000000",
-      borderRadius: 25
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      width:300,
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:15,
-      paddingTop:13,
-      height:50,
-      marginTop:9,
-      color: "#000033"
-    },
-    fff: {
-      paddingLeft: 220,
-      marginTop: -36
-    },
-    cont:{
-      marginTop: 25
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      width:300,
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      marginTop:13,
-      color: "#000033"
-    },
-    fff:{
-      paddingLeft: 220,
-      marginTop: -36
-    },
-    cont:{
-      marginTop: 25
-    },
-    wk:{
-      backgroundColor: "#66ccff",
-      fontSize: 13,
-      width:305,
-      marginLeft: 20,
-      marginRight: 20,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      color:"#000000",
-      borderRadius: 25
-    },
-    wkk: {
-      paddingLeft: 165,
-      marginTop: -36,
-      color:"#000000"
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      width:300,
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      marginTop:13,
-      color: "#000033"
-    },
-    fff:{
-      paddingLeft: 200,
-      marginTop: -36
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      fontSize: 13,
-      width:300,
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      color: "#000033",
-      marginTop:13,
-    },
-    fff:{
-      paddingLeft: 195,
-      marginTop: -36
-    },
-    cont:{
-     marginTop: 25
-    },
-    wk:{
-      backgroundColor: "#66ccff",
-      fontSize: 13,
-      width:305,
-      marginLeft: 20,
-      marginRight: 20,
-      paddingLeft:10,
-      paddingTop:13,
-      height:50,
-      color:"#000000",
-      borderRadius: 25
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      fontSize: 13,
-      width:300,
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      color: "#000033",
-      marginTop:13,
-    },
-    fff:{
-      paddingLeft: 230,
-      marginTop: -36
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      fontSize: 13,
-      width:300, 
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      color: "#000033",
-      marginTop:13,
-    },
-    fff:{
-      paddingLeft: 230,
-      marginTop: -36
-    },
-    cont:{
-      marginTop: 25
-     },
-    wk:{
-      backgroundColor: "#66ccff",
-      fontSize: 13,
-      width:305,
-      marginLeft: 20,
-      marginRight: 20,
-      paddingLeft:10,
-      paddingTop:13,
-      height:50,
-      color:"#000000",
-      borderRadius: 25
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      fontSize: 13,
-      width:300,
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      color: "#000033",
-      marginTop:13,
-    },
-    fff:{
-      paddingLeft: 230,
-      marginTop: -36
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      fontSize: 13,
-      width:300,
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      color: "#000033",
-      marginTop:13,
-    },
-    fff:{
-      paddingLeft: 230,
-      marginTop: -36
-    },
-    cont:{
-      marginTop: 25
-     },
-    wk:{
-      backgroundColor: "#66ccff",
-      fontSize: 13,
-      width:305,
-      marginLeft: 20,
-      marginRight: 20,
-      paddingLeft:10,
-      paddingTop:13,
-      height:50,
-      color:"#000000",
-      borderRadius: 25
-    },
-    cc:{
-      backgroundColor: "#99ddff",
-      fontSize: 13,
-      width:300,
-      marginLeft: 23,
-      marginRight: 23,
-      paddingLeft:13,
-      paddingTop:13,
-      height:50,
-      color: "#000033",
-      marginTop:13,
-    },
-    fff:{
-      paddingLeft: 200,
-      marginTop: -36
-    },
-    cont:{
-      marginTop: 53
-     },
-  })
+import { View,Text,ScrollView,Alert, Image,ImageBackground, Button,StyleSheet,ActivityIndicator,AsyncStorage  } from "react-native";
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import webService from './webService';
+import GridView from "react-native-gridview";
+import CollapsingToolbar from 'react-native-collapse-view';
+import CollapseView from "react-native-collapse-view";
+import {TouchableOpacity,} from 'react-native' ;
+import { Right } from 'native-base';
+
+export default class serviceOrder extends React.Component {
   
+
+ 
+  
+
+  
+      // <Text style={{width: "1000%", fontSize:20}}>The technician ehfdegeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</Text>
+     
+      _onPressButton1() {
+        Alert.alert('MONTGOMERY, Alabama- Get Directions ')
+      }
+
+      
+      _onPressButton2() {
+        Alert.alert('Technician will take direction from Onsi...')
+      }
+
+     
+  
+
+    render(){
+      
+      
+     
+    
+      return(
+        
+        
+     <View>
+<ImageBackground
+        source={require("./Images/BG.png") }
+        style={{
+          height: 120,
+          width: "100%",
+          position: 'relative', // because it's parent
+          top: 2,
+          left: 2
+        }}
+      >
+        <Text
+          style={{
+            alignSelf:"center", paddingTop:30, fontSize:30, color:"#c8fc97",fontStyle:"italic"
+          }}
+        >
+          Work Order 
+        </Text>
+        <Text
+          style={{
+            alignSelf:"center", paddingTop:0, fontSize:25, color:"#c8fc97",fontStyle:"italic"
+          }}
+        >
+          (5465464)
+        </Text>
+      </ImageBackground>
+
+<ScrollView style={{padding:5}}>
+
+      
+  
+                  <TouchableOpacity>
+                  <View style={styles.c1}>
+
+                          <Image
+                                      source={require("./Images/Dot.jpg")}
+                                      style={{ width: 15, height: 15,borderRadius:10 }}
+                          /> 
+                          <Text 
+                          style={{marginLeft:10, fontSize:20, color:"black"}}>
+                          Current Distance:     545454 miles
+                          </Text>
+                  </View>
+                  </TouchableOpacity>
+         
+
+                  <TouchableOpacity>
+                      <View style={styles.c1}>
+
+                        <Image
+                            source={require("./Images/Dot.jpg")}
+                            style={{ width: 15, height: 15,borderRadius:10 }}
+                        />
+                        <Text
+                        style={{marginLeft:10, fontSize:20, color:"black"}}>
+                        From base address:     37.01 miles
+                        </Text>
+                      </View>
+                  </TouchableOpacity>
+
+
+    
+                  <TouchableOpacity>
+                          <View style={styles.c1}>
+
+                                <Image
+                                    source={require("./Images/Dot1.png")}
+                                    style={{ width: 15, height: 15,borderRadius:10 }}
+                                />
+                          
+                              <Text style={{marginLeft:10, fontSize:20, color:"black",fontWeight:"bold"}}>
+                                Due Date :     
+                              </Text>
+                                
+                                <Text style={{flexDirection:"column", marginLeft:10, fontSize:18, color:"black",fontWeight:"bold" }}>
+                                11/29/2018  3:00:00 PM
+                                </Text>
+                            </View>
+                          
+                  </TouchableOpacity>
+       
+
+
+                  <TouchableOpacity>
+                  <View style={styles.c1}>
+
+                          <Image
+                                      source={require("./Images/Dot.jpg")}
+                                      style={{ width: 15, height: 15,borderRadius:10 }}
+                          /> 
+                          <Text 
+                          style={{marginLeft:10, fontSize:20, color:"black"}}>
+                          Service Type:     Installation
+                          </Text>
+                  </View>
+                  </TouchableOpacity>
+
+
+                  <TouchableOpacity  onPress={this._onPressButton1}>
+                  <View style={styles.c1}>
+                          <Image
+                                          source={require("./Images/Dot.jpg")}
+                                          style={{ width: 15, height: 15,borderRadius:10 }}
+                              /> 
+                            <Text style={{marginLeft:10, fontSize:20, color:"black"}}>
+                              Site Location:
+                            </Text>
+                            <Text style={{fontSize:20, color:"black",fontWeight:"bold",marginLeft:50}}>
+                              Show...
+                            </Text>
+                  </View>
+                  </TouchableOpacity>
+
+
+
+
+
+
+
+                   <TouchableOpacity>
+                          <View style={styles.c1}>
+
+                                <Image
+                                    source={require("./Images/Dot1.png")}
+                                    style={{ width: 15, height: 15,borderRadius:10 }}
+                                />
+                          
+                              <Text style={{marginLeft:10, fontSize:20, color:"black",fontWeight:"bold"}}>
+                                Work Detail    
+                              </Text>
+                            </View>
+                          
+                  </TouchableOpacity>
+
+  
+
+                  <TouchableOpacity>
+                  <View style={styles.c1}>
+
+                          <Image
+                                      source={require("./Images/Dot.jpg")}
+                                      style={{ width: 15, height: 15,borderRadius:10 }}
+                          /> 
+                          <Text 
+                          style={{marginLeft:10, fontSize:20, color:"black"}}>
+                          Item Code:     MISCSVCn
+                          </Text>
+                  </View>
+                  </TouchableOpacity>
+
+
+ 
+
+    <Text 
+      style={{marginLeft:5,fontSize:18, color:"black"}}>
+       Item Name:     MISCELLANEOUS
+    </Text>
+
+    <View
+      style={{
+        borderBottomColor: '#cccccc',
+        borderBottomWidth: 2,
+      }}      
+    />	 
+
+     <Text 
+      style={{marginLeft:5,fontSize:18, color:"black"}}>
+       Will Parts Be On Site:     Yes
+    </Text>
+
+    <View
+      style={{
+        borderBottomColor: '#cccccc',
+        borderBottomWidth: 2,
+      }}      
+    />	 
+
+
+       
+          <TouchableOpacity  onPress={this._onPressButton2}>
+            <View style={{marginLeft:5, flexDirection:'row'}} >
+              <Text style={{fontSize:18, color:"black"}}>
+                Problem Desc. :
+              </Text>
+              <Text style={{fontSize:18, color:"black",fontWeight:"bold",marginLeft:50}}>
+                Show...
+              </Text>
+          </View>
+        </TouchableOpacity>
+            
+            
+        
+    <View
+      style={{
+        borderBottomColor: '#cccccc',
+        borderBottomWidth: 2,
+      }}      
+    />	 
+
+    <Text 
+      style={{marginLeft:5,fontSize:18, color:"black"}}>
+       Parts Ordered:     Printer
+    </Text>
+
+    <View
+      style={{
+        borderBottomColor: '#cccccc',
+        borderBottomWidth: 2,
+      }}      
+    />	 
+
+ 
+  <View style={{height:500 }}></View>
+
+
+      </ScrollView>
+
+     </View>
+
+        
+      );
+      
+    }}
+
+
+    const styles=StyleSheet.create({
+      c1: {flexDirection: "row",
+      backgroundColor: "#ededed",
+      paddingVertical: 15,
+      paddingLeft: 10,
+      alignItems: "center"
+
+      },
+      
+    }
+    );
+      
+  
+
+   

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { Text, View, ActivityIndicator, Button, StyleSheet } from "react-native";
+import { Text, View, ActivityIndicator, Button, StyleSheet, AsyncStorage, } from "react-native";
 import GridView from "react-native-gridview";
 import webService from "./webService";
 import serviceOrder from "./serviceOrder";
@@ -13,6 +13,14 @@ export default class ViewAvailable extends React.Component {
 			values: null,
 			isLoading: true,
 		};
+	}
+
+
+	goToServiceOrder(x,y,z){
+		
+		
+		this.props.navigation.navigate("serviceOrder");
+	
 	}
 
 	viewAvailable(techId, UserName, password) {
@@ -69,48 +77,45 @@ else{
 
 
 		return (
-			<TouchableOpacity>
+			
 			<GridView
 			data={this.state.values}
 			itemsPerRow={1}
 			renderItem={item => (
+				<TouchableOpacity onPress={() => this.goToServiceOrder(mainData,password,item.WorkOrder)}>
 				<View style={styles.header} key={cnt++}>
 					<Text style={styles.head}
-						onPress={() => this.props.navigation.navigate("serviceOrder")}
 						style={styles.fheader}>
 							{item.ServiceType+"("+ item.WorkOrder+")"}
 					</Text>
 						
 					<Text
 						style={styles.head}
-						onPress={() => this.props.navigation.navigate("serviceOrder")}
 						style={styles.cc}
 					>
 						Due Date: {item.DueDate}
 					</Text>
 					<Text
 						style={styles.head}
-						onPress={() => this.props.navigation.navigate("serviceOrder")}
 						style={styles.c1}
 					>
 						Distance: {item.Distance}
 					</Text>
 					<Text
 						style={styles.head}
-						onPress={() => this.props.navigation.navigate("serviceOrder")}
 						style={styles.c2}
 					>
 						Location: {item.LocationCity}
 					</Text>
 					<Text
 						style={styles.head}
-						onPress={() => this.props.navigation.navigate("serviceOrder")}
 						style={styles.c3}
 					/>
 				</View>
+				</TouchableOpacity>
 			)}
 		/>
-	</TouchableOpacity>
+	
 		);
 	}}
 }

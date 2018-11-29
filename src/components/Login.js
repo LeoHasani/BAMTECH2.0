@@ -99,6 +99,8 @@ import Spinner from "react-native-loading-spinner-overlay";
 				if (responseJson[0].status == "True") {
 					AsyncStorage.setItem("id_token", responseJson[0].TechnicianCode);
 					AsyncStorage.setItem("password", password);
+				
+
 					this.props.navigation.navigate("Drawer", {
 						data: responseJson[0],
 						password: password,
