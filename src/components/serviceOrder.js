@@ -8,7 +8,7 @@ import CollapsingToolbar from 'react-native-collapse-view';
 import CollapseView from "react-native-collapse-view";
 import {TouchableOpacity,} from 'react-native' ;
 import { Right } from 'native-base';
-
+import Expand  from 'react-native-simple-expand';
 export default class serviceOrder extends React.Component {
   
 
@@ -38,11 +38,11 @@ export default class serviceOrder extends React.Component {
       return(
         
         
-     <View>
+     <View  style={{padding:5, height: "100%", width: "100%"}}>
 <ImageBackground
         source={require("./Images/BG.png") }
         style={{
-          height: 120,
+          height: 100,
           width: "100%",
           position: 'relative', // because it's parent
           top: 2,
@@ -51,7 +51,7 @@ export default class serviceOrder extends React.Component {
       >
         <Text
           style={{
-            alignSelf:"center", paddingTop:30, fontSize:30, color:"#c8fc97",fontStyle:"italic"
+            alignSelf:"center", paddingTop:10, fontSize:30, color:"#c8fc97",fontStyle:"italic"
           }}
         >
           Work Order 
@@ -65,9 +65,21 @@ export default class serviceOrder extends React.Component {
         </Text>
       </ImageBackground>
 
-<ScrollView style={{padding:5}}>
+<ScrollView>
 
       
+      <View>
+               <TouchableOpacity onPress={() => this.setState({ open: !this.state.open })}>
+                <Text>Toggle Menu</Text>
+               </TouchableOpacity>
+               <Expand value={this.state.open}>
+                   <Text>
+                    Some very very very very very very very very very very very very very very very very very very very very great content
+                   </Text>
+               </Expand>
+           </View>
+
+
   
                   <TouchableOpacity>
                   <View style={styles.c1}>
@@ -183,74 +195,72 @@ export default class serviceOrder extends React.Component {
                           /> 
                           <Text 
                           style={{marginLeft:10, fontSize:20, color:"black"}}>
-                          Item Code:     MISCSVCn
+                          Item Code:     MISCSVC
                           </Text>
                   </View>
                   </TouchableOpacity>
 
 
- 
+                  <TouchableOpacity>
+                  <View style={styles.c1}>
 
-    <Text 
-      style={{marginLeft:5,fontSize:18, color:"black"}}>
-       Item Name:     MISCELLANEOUS
-    </Text>
+                          <Image
+                                      source={require("./Images/Dot.jpg")}
+                                      style={{ width: 15, height: 15,borderRadius:10 }}
+                          /> 
+                          <Text 
+                          style={{marginLeft:10, fontSize:20, color:"black"}}>
+                          Item Name:     MISCELLANEOUS
+                          </Text>
+                  </View>
+                  </TouchableOpacity>
 
-    <View
-      style={{
-        borderBottomColor: '#cccccc',
-        borderBottomWidth: 2,
-      }}      
-    />	 
+    
+                  <TouchableOpacity>
+                  <View style={styles.c1}>
 
-     <Text 
-      style={{marginLeft:5,fontSize:18, color:"black"}}>
-       Will Parts Be On Site:     Yes
-    </Text>
+                          <Image
+                                      source={require("./Images/Dot.jpg")}
+                                      style={{ width: 15, height: 15,borderRadius:10 }}
+                          /> 
+                          <Text 
+                          style={{marginLeft:10, fontSize:20, color:"black"}}>
+                          Will Parts Be On Site:     Yes
+                          </Text>
+                  </View>
+                  </TouchableOpacity>
+    
 
-    <View
-      style={{
-        borderBottomColor: '#cccccc',
-        borderBottomWidth: 2,
-      }}      
-    />	 
+                  <TouchableOpacity  onPress={this._onPressButton2}>
+                  <View style={styles.c1}>
+                          <Image
+                                          source={require("./Images/Dot.jpg")}
+                                          style={{ width: 15, height: 15,borderRadius:10 }}
+                              /> 
+                            <Text style={{marginLeft:10, fontSize:20, color:"black"}}>
+                              Site Location:
+                            </Text>
+                            <Text style={{fontSize:20, color:"black",fontWeight:"bold",marginLeft:50}}>
+                              Show...
+                            </Text>
+                  </View>
+                  </TouchableOpacity>
 
 
-       
-          <TouchableOpacity  onPress={this._onPressButton2}>
-            <View style={{marginLeft:5, flexDirection:'row'}} >
-              <Text style={{fontSize:18, color:"black"}}>
-                Problem Desc. :
-              </Text>
-              <Text style={{fontSize:18, color:"black",fontWeight:"bold",marginLeft:50}}>
-                Show...
-              </Text>
-          </View>
-        </TouchableOpacity>
-            
-            
-        
-    <View
-      style={{
-        borderBottomColor: '#cccccc',
-        borderBottomWidth: 2,
-      }}      
-    />	 
+                  <TouchableOpacity>
+                  <View style={styles.c1}>
 
-    <Text 
-      style={{marginLeft:5,fontSize:18, color:"black"}}>
-       Parts Ordered:     Printer
-    </Text>
-
-    <View
-      style={{
-        borderBottomColor: '#cccccc',
-        borderBottomWidth: 2,
-      }}      
-    />	 
-
- 
-  <View style={{height:500 }}></View>
+                          <Image
+                                      source={require("./Images/Dot.jpg")}
+                                      style={{ width: 15, height: 15,borderRadius:10 }}
+                          /> 
+                          <Text 
+                          style={{marginLeft:10, fontSize:20, color:"black"}}>
+                          Parts Ordered:     Printer
+                          </Text>
+                  </View>
+                  </TouchableOpacity>
+                  
 
 
       </ScrollView>
