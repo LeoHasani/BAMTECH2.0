@@ -8,10 +8,56 @@ import CollapsingToolbar from 'react-native-collapse-view';
 import CollapseView from "react-native-collapse-view";
 import {TouchableOpacity,} from 'react-native' ;
 import { Right } from 'native-base';
-import Expand  from 'react-native-simple-expand';
-export default class serviceOrder extends React.Component {
-  
 
+
+export default class serviceOrder extends React.Component {
+  constructor(props) {
+		super(props);
+		this.state = {
+      respon:null,
+      isLoading:true,
+		};
+	}
+
+  serviceOrder(techId,sorderId, UserName, password) {
+		let detail = "no";
+		
+		fetch(webService.serviceOrder, {
+			method: "POST",
+			headers: {
+				Host: "bam.barrister.com",
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+
+			body:
+				"TechnicianId=" +
+				techId +
+        "&ServiceOrderId="+
+        sorderId+
+        "&DeviceTokenId="+
+        "123"+
+				"&UserName=" +
+				UserName +
+				"&Password=" +
+				password,
+		})
+			.then(response => response.json())
+			.then(responseJson =>
+        this.setState({
+					respon: responseJson.TechnicianName,
+					isLoading: false,
+				})
+      
+			)
+			.catch(err => {
+				console.log("error"+err);
+			})
+			.then((json) => {
+				if (json) {
+					success(json);
+				}
+			})
+	}
  
   
 
@@ -32,234 +78,222 @@ export default class serviceOrder extends React.Component {
 
     render(){
       
-      
-     
+      let test=this.props.navigation.getParam("sorderId");
+ 
+     let prove=this.props.navigation.getParam("mData");
+     console.log("prove"+prove);
+     let psw=this.props.navigation.getParam("password");
+   
+    
+      this.serviceOrder(prove.mainData.TechnicianId,test,prove.mainData.TechnicianCode,psw.password);
     
       return(
         
         
-     <View  style={{padding:5, height: "100%", width: "100%"}}>
-<ImageBackground
-        source={require("./Images/BG.png") }
-        style={{
+     <View  style={{padding:5,height: "100%",width: "100%"}}>
+
+      <View style={{
           height: 100,
           width: "100%",
           position: 'relative', // because it's parent
-          top: 2,
-          left: 2
-        }}
-      >
+          backgroundColor: "#d9d9d9",
+          flexDirection: "row",
+          paddingHorizontal: "10%"
+        }}>
         <Text
           style={{
-            alignSelf:"center", paddingTop:10, fontSize:30, color:"#c8fc97",fontStyle:"italic"
+            alignSelf:"center", paddingTop:0, fontSize:30, color:"black",fontStyle:"italic",fontWeight:"bold"
           }}
         >
           Work Order 
         </Text>
         <Text
           style={{
-            alignSelf:"center", paddingTop:0, fontSize:25, color:"#c8fc97",fontStyle:"italic"
+            alignSelf:"center", paddingTop:0, fontSize:30, color:"black",fontStyle:"italic",fontWeight:"bold"
           }}
         >
-          (5465464)
+          ({test})
         </Text>
-      </ImageBackground>
+        </View>
 
 <ScrollView>
 
       
-      <View>
-               <TouchableOpacity onPress={() => this.setState({ open: !this.state.open })}>
-                <Text>Toggle Menu</Text>
-               </TouchableOpacity>
-               <Expand value={this.state.open}>
-                   <Text>
-                    Some very very very very very very very very very very very very very very very very very very very very great content
-                   </Text>
-               </Expand>
-           </View>
+                    <TouchableOpacity>
+                    <View style={styles.c1}>
 
+                            <Image
+                                        source={require("./Images/Dot.jpg")}
+                                        style={{ width: 15, height: 15,borderRadius:10 }}
+                            /> 
+                            <Text 
+                            style={{marginLeft:10, fontSize:20, color:"black"}}>
+                            Current Distance:     545454 miles
+                            </Text>
+                    </View>
+                    </TouchableOpacity>
+          
 
-  
-                  <TouchableOpacity>
-                  <View style={styles.c1}>
+                    <TouchableOpacity>
+                        <View style={styles.c1}>
 
                           <Image
-                                      source={require("./Images/Dot.jpg")}
-                                      style={{ width: 15, height: 15,borderRadius:10 }}
-                          /> 
-                          <Text 
+                              source={require("./Images/Dot.jpg")}
+                              style={{ width: 15, height: 15,borderRadius:10 }}
+                          />
+                          <Text
                           style={{marginLeft:10, fontSize:20, color:"black"}}>
-                          Current Distance:     545454 miles
+                          From base address:     37.01 miles
                           </Text>
-                  </View>
-                  </TouchableOpacity>
-         
-
-                  <TouchableOpacity>
-                      <View style={styles.c1}>
-
-                        <Image
-                            source={require("./Images/Dot.jpg")}
-                            style={{ width: 15, height: 15,borderRadius:10 }}
-                        />
-                        <Text
-                        style={{marginLeft:10, fontSize:20, color:"black"}}>
-                        From base address:     37.01 miles
-                        </Text>
-                      </View>
-                  </TouchableOpacity>
+                        </View>
+                    </TouchableOpacity>
 
 
-    
-                  <TouchableOpacity>
-                          <View style={styles.c1}>
+      
+                    <TouchableOpacity>
+                            <View style={styles.c1}>
 
-                                <Image
-                                    source={require("./Images/Dot1.png")}
-                                    style={{ width: 15, height: 15,borderRadius:10 }}
-                                />
-                          
-                              <Text style={{marginLeft:10, fontSize:20, color:"black",fontWeight:"bold"}}>
-                                Due Date :     
-                              </Text>
-                                
-                                <Text style={{flexDirection:"column", marginLeft:10, fontSize:18, color:"black",fontWeight:"bold" }}>
-                                11/29/2018  3:00:00 PM
+                                  <Image
+                                      source={require("./Images/Dot1.png")}
+                                      style={{ width: 15, height: 15,borderRadius:10 }}
+                                  />
+                            
+                                <Text style={{marginLeft:10, fontSize:20, color:"black",fontWeight:"bold",fontStyle:"italic"}}>
+                                  Due Date :     
                                 </Text>
-                            </View>
-                          
-                  </TouchableOpacity>
-       
+                                  
+                                  <Text style={{flexDirection:"column", marginLeft:10, fontSize:18, color:"black",fontStyle:"italic",fontWeight:"bold" }}>
+                                  11/29/2018  3:00:00 PM
+                                  </Text>
+                              </View>
+                            
+                    </TouchableOpacity>
+        
 
 
-                  <TouchableOpacity>
-                  <View style={styles.c1}>
+                    <TouchableOpacity>
+                    <View style={styles.c1}>
 
-                          <Image
-                                      source={require("./Images/Dot.jpg")}
-                                      style={{ width: 15, height: 15,borderRadius:10 }}
-                          /> 
-                          <Text 
-                          style={{marginLeft:10, fontSize:20, color:"black"}}>
-                          Service Type:     Installation
-                          </Text>
-                  </View>
-                  </TouchableOpacity>
-
-
-                  <TouchableOpacity  onPress={this._onPressButton1}>
-                  <View style={styles.c1}>
-                          <Image
-                                          source={require("./Images/Dot.jpg")}
-                                          style={{ width: 15, height: 15,borderRadius:10 }}
-                              /> 
-                            <Text style={{marginLeft:10, fontSize:20, color:"black"}}>
-                              Site Location:
+                            <Image
+                                        source={require("./Images/Dot.jpg")}
+                                        style={{ width: 15, height: 15,borderRadius:10 }}
+                            /> 
+                            <Text 
+                            style={{marginLeft:10, fontSize:20, color:"black"}}>
+                            Service Type:     Installation
                             </Text>
-                            <Text style={{fontSize:20, color:"black",fontWeight:"bold",marginLeft:50}}>
-                              Show...
-                            </Text>
-                  </View>
-                  </TouchableOpacity>
+                    </View>
+                    </TouchableOpacity>
 
 
-
-
-
-
-
-                   <TouchableOpacity>
-                          <View style={styles.c1}>
-
-                                <Image
-                                    source={require("./Images/Dot1.png")}
-                                    style={{ width: 15, height: 15,borderRadius:10 }}
-                                />
-                          
-                              <Text style={{marginLeft:10, fontSize:20, color:"black",fontWeight:"bold"}}>
-                                Work Detail    
+                    <TouchableOpacity  onPress={this._onPressButton1}>
+                    <View style={styles.c1}>
+                            <Image
+                                            source={require("./Images/Dot.jpg")}
+                                            style={{ width: 15, height: 15,borderRadius:10 }}
+                                /> 
+                              <Text style={{marginLeft:10, fontSize:20, color:"black"}}>
+                                Site Location:
                               </Text>
-                            </View>
-                          
-                  </TouchableOpacity>
+                              <Text style={{fontSize:20, color:"black",fontWeight:"bold",marginLeft:50,fontStyle:"italic"}}>
+                                Show...
+                              </Text>
+                    </View>
+                    </TouchableOpacity>
 
-  
 
-                  <TouchableOpacity>
-                  <View style={styles.c1}>
 
-                          <Image
-                                      source={require("./Images/Dot.jpg")}
+                    <TouchableOpacity>
+                            <View style={styles.c1}>
+
+                                  <Image
+                                      source={require("./Images/Dot1.png")}
                                       style={{ width: 15, height: 15,borderRadius:10 }}
-                          /> 
-                          <Text 
-                          style={{marginLeft:10, fontSize:20, color:"black"}}>
-                          Item Code:     MISCSVC
-                          </Text>
-                  </View>
-                  </TouchableOpacity>
-
-
-                  <TouchableOpacity>
-                  <View style={styles.c1}>
-
-                          <Image
-                                      source={require("./Images/Dot.jpg")}
-                                      style={{ width: 15, height: 15,borderRadius:10 }}
-                          /> 
-                          <Text 
-                          style={{marginLeft:10, fontSize:20, color:"black"}}>
-                          Item Name:     MISCELLANEOUS
-                          </Text>
-                  </View>
-                  </TouchableOpacity>
+                                  />
+                            
+                                <Text style={{marginLeft:10, fontSize:20, color:"black",fontWeight:"bold",fontStyle:"italic"}}>
+                                  Work Detail    
+                                </Text>
+                              </View>
+                            
+                    </TouchableOpacity>
 
     
-                  <TouchableOpacity>
-                  <View style={styles.c1}>
 
-                          <Image
-                                      source={require("./Images/Dot.jpg")}
-                                      style={{ width: 15, height: 15,borderRadius:10 }}
-                          /> 
-                          <Text 
-                          style={{marginLeft:10, fontSize:20, color:"black"}}>
-                          Will Parts Be On Site:     Yes
-                          </Text>
-                  </View>
-                  </TouchableOpacity>
-    
+                    <TouchableOpacity>
+                    <View style={styles.c1}>
 
-                  <TouchableOpacity  onPress={this._onPressButton2}>
-                  <View style={styles.c1}>
-                          <Image
-                                          source={require("./Images/Dot.jpg")}
-                                          style={{ width: 15, height: 15,borderRadius:10 }}
-                              /> 
-                            <Text style={{marginLeft:10, fontSize:20, color:"black"}}>
-                              Site Location:
+                            <Image
+                                        source={require("./Images/Dot.jpg")}
+                                        style={{ width: 15, height: 15,borderRadius:10 }}
+                            /> 
+                            <Text 
+                            style={{marginLeft:10, fontSize:20, color:"black"}}>
+                            Item Code:     MISCSVC
                             </Text>
-                            <Text style={{fontSize:20, color:"black",fontWeight:"bold",marginLeft:50}}>
-                              Show...
+                    </View>
+                    </TouchableOpacity>
+
+
+                    <TouchableOpacity>
+                    <View style={styles.c1}>
+
+                            <Image
+                                        source={require("./Images/Dot.jpg")}
+                                        style={{ width: 15, height: 15,borderRadius:10 }}
+                            /> 
+                            <Text 
+                            style={{marginLeft:10, fontSize:20, color:"black"}}>
+                            Item Name:    {this.state.respon}
                             </Text>
-                  </View>
-                  </TouchableOpacity>
+                    </View>
+                    </TouchableOpacity>
+
+      
+                    <TouchableOpacity>
+                    <View style={styles.c1}>
+
+                            <Image
+                                        source={require("./Images/Dot.jpg")}
+                                        style={{ width: 15, height: 15,borderRadius:10 }}
+                            /> 
+                            <Text 
+                            style={{marginLeft:10, fontSize:20, color:"black"}}>
+                            Will Parts Be On Site:     Yes
+                            </Text>
+                    </View>
+                    </TouchableOpacity>
+      
+
+                    <TouchableOpacity  onPress={this._onPressButton2}>
+                    <View style={styles.c1}>
+                            <Image
+                                            source={require("./Images/Dot.jpg")}
+                                            style={{ width: 15, height: 15,borderRadius:10 }}
+                                /> 
+                              <Text style={{marginLeft:10, fontSize:20, color:"black"}}>
+                                Problem Desc. :
+                              </Text>
+                              <Text style={{fontSize:20, color:"black",fontWeight:"bold",marginLeft:50,fontStyle:"italic"}}>
+                                Show...
+                              </Text>
+                    </View>
+                    </TouchableOpacity>
 
 
-                  <TouchableOpacity>
-                  <View style={styles.c1}>
+                    <TouchableOpacity>
+                    <View style={styles.c1}>
 
-                          <Image
-                                      source={require("./Images/Dot.jpg")}
-                                      style={{ width: 15, height: 15,borderRadius:10 }}
-                          /> 
-                          <Text 
-                          style={{marginLeft:10, fontSize:20, color:"black"}}>
-                          Parts Ordered:     Printer
-                          </Text>
-                  </View>
-                  </TouchableOpacity>
+                            <Image
+                                        source={require("./Images/Dot.jpg")}
+                                        style={{ width: 15, height: 15,borderRadius:10 }}
+                            /> 
+                            <Text 
+                            style={{marginLeft:10, fontSize:20, color:"black"}}>
+                            Parts Ordered:     Printer
+                            </Text>
+                    </View>
+                    </TouchableOpacity>
                   
 
 

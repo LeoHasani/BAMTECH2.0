@@ -16,10 +16,10 @@ export default class ViewAvailable extends React.Component {
 	}
 
 
-	goToServiceOrder(x,y,z){
+	goToServiceOrder(x,mainData,password){
 		
 		
-		this.props.navigation.navigate("serviceOrder");
+		this.props.navigation.navigate("serviceOrder",{sorderId:x, mData: mainData,password:password} );
 	
 	}
 
@@ -66,6 +66,7 @@ export default class ViewAvailable extends React.Component {
 		let password=this.props.navigation.getParam("password");
 		this.viewAvailable(mainData.TechnicianId, mainData.TechnicianCode, password);
 		
+		
 		if (this.state.isLoading) {
 			return (
 				<View style={{ flex: 1, paddingTop: 20 }}>
@@ -73,6 +74,9 @@ export default class ViewAvailable extends React.Component {
 				</View>
 			);
 		}
+
+
+
 else{
 
 
@@ -82,7 +86,7 @@ else{
 			data={this.state.values}
 			itemsPerRow={1}
 			renderItem={item => (
-				<TouchableOpacity onPress={() => this.goToServiceOrder(mainData,password,item.WorkOrder)}>
+				<TouchableOpacity onPress={() => this.goToServiceOrder(item.WorkOrder, {mainData},{password})}>
 				<View style={styles.header} key={cnt++}>
 					<Text style={styles.head}
 						style={styles.fheader}>

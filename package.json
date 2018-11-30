@@ -22,6 +22,7 @@
     "react-native-deviceinfo": "^0.10.4",
     "react-native-drawer-menu": "^0.2.5",
     "react-native-elements": "^0.19.1",
+    "react-native-expand": "^1.0.6",
     "react-native-gridview": "^0.1.2",
     "react-native-image-header-scroll-view": "^0.8.2",
     "react-native-ios-picker": "^1.0.0",

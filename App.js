@@ -43,7 +43,7 @@ const Main= StackNavigator(
 	
 	{
 		Main:{
-			screen: serviceOrder
+			screen: DefaultScreen
 		},
 		AcceptedByYou:{
 			screen: AcceptedByYou
