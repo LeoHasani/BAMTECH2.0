@@ -42,7 +42,8 @@ export default class DrawerHeader extends React.Component {
 		
         // this.navigation.setParam({name: mainData.TechnicianName});
 		
-		
+		console.log(AsyncStorage.getItem('password'));
+
 
                
 		return (

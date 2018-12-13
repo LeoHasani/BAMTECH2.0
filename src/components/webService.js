@@ -14,5 +14,6 @@ export default {
 	AcceptedByYou:
 		"http://bam.barrister.com/BAMIOSApplication/service.asmx/GetTechnicianAcceptedWorkOrders",
 	serviceOrder:
-		"http://bam.barrister.com/BAMIOSApplication/service.asmx/GetSingleWorkOrderDetails",
+		// "http://bam.barrister.com/BAMIOSApplication/service.asmx/GetSingleWorkOrderDetails",
+		"http://bam.barrister.com/BAMIOSApplication/service.asmx/GetWorkOrderDetail",
 };

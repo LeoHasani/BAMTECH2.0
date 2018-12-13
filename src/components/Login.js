@@ -135,6 +135,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 	}
 
 	render() {
+	
 		if (this.state.isLoaded) {
 			return (
 				<View style={{ flex: 1, paddingTop: 20 }}>
