@@ -1,19 +1,21 @@
 /* eslint-disable */
+var url = "http://testbam.barrister.com/apipub/service.asmx/";
 
 export default {
-	addTechnician:
-		"http://bam.barrister.com/BAMIOSApplication/service.asmx/AddNewTechnician",
+	addTechnician: url+"AddNewTechnician",
+		// "http://bam.barrister.com/BAMIOSApplication/service.asmx/AddNewTechnician",
 	setSignUpDetails:
-		"http://bam.barrister.com/BAMIOSApplication/service.asmx/SignUp",
+	url+"SignUp",
 	loginDetails:
 	// "http://localhost:56020/Service.asmx/IsTechnicianAuthenticate",
 		// "http://testbam.barrister.com/bamtechnicianapp/service.asmx/IsTechnicianAuthenticate",
-		"http://bam.barrister.com/BAMIOSApplication/service.asmx/IsTechnicianAuthenticate",
+		url+"IsTechnicianAuthenticate",
 	ViewAvailable:
-		"http://bam.barrister.com/BAMIOSApplication/service.asmx/GetTechnicianAvailableWorkOrders",
+		url+"GetTechnicianAvailableWorkOrders",
 	AcceptedByYou:
-		"http://bam.barrister.com/BAMIOSApplication/service.asmx/GetTechnicianAcceptedWorkOrders",
+		url+"GetTechnicianAcceptedWorkOrders",
 	serviceOrder:
-		// "http://bam.barrister.com/BAMIOSApplication/service.asmx/GetSingleWorkOrderDetails",
-		"http://bam.barrister.com/BAMIOSApplication/service.asmx/GetWorkOrderDetail",
+		//"http://bam.barrister.com/BAMIOSApplication/service.asmx/GetSingleWorkOrderDetails",
+		url+"GetWorkOrderDetail",
+	
 };
