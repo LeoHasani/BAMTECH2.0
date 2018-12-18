@@ -251,13 +251,7 @@ export default class serviceOrder extends React.Component {
 
                           
                           </Text>
-                          {/* <TouchableOpacity >
-                            <Text style={{color:"blue",
-                                          paddingHorizontal:35,
-                                          flexDirection: "row",
-                                          alignItems: "center",
-                                          fontSize:20,}}>Get Directions</Text>
-                          </TouchableOpacity> */}
+                          
                     </Panel>
 
 
