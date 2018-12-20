@@ -12,6 +12,8 @@ export default class ViewAvailable extends React.Component {
 		this.state = {
 			values: null,
 			isLoading: true,
+			maindata: null,
+			password: null,
 		};
 	}
 
@@ -23,8 +25,21 @@ export default class ViewAvailable extends React.Component {
 	
 	}
 
-	viewAvailable(techId, UserName, password) {
-		let detail = "no";
+	// viewAvailable(techId, UserName, password) {
+	// 	let detail = "no";
+
+	componentDidMount() {
+		let mainData = this.props.navigation.getParam("page");
+		let password=this.props.navigation.getParam("password");
+		let techId=mainData.TechnicianId;
+		let UserName=mainData.TechnicianCode;
+		let detail="no";
+		this.setState({
+			maindata:mainData,
+			password:password
+
+		})
+
 		
 		fetch(webService.ViewAvailable, {
 			method: "POST",
@@ -62,9 +77,6 @@ export default class ViewAvailable extends React.Component {
 	render() {
 		let cnt=0;
 		
-		let mainData = this.props.navigation.getParam("page");
-		let password=this.props.navigation.getParam("password");
-		this.viewAvailable(mainData.TechnicianId, mainData.TechnicianCode, password);
 		
 		
 		if (this.state.isLoading) {
@@ -77,8 +89,15 @@ export default class ViewAvailable extends React.Component {
 
 
 
+else if (this.state.values[0].status=="No"){
+
+			return(<View>{alert(this.state.values[0].newmessage)}</View>)
+		}
+	
 else{
 
+
+	console.log(this.state.values)
 
 		return (
 			
@@ -86,7 +105,7 @@ else{
 			data={this.state.values}
 			itemsPerRow={1}
 			renderItem={item => (
-				<TouchableOpacity onPress={() => this.goToServiceOrder(item.WorkOrder, {mainData},{password})}>
+				<TouchableOpacity onPress={() => this.goToServiceOrder(item.WorkOrder,this.state.maindata,this.state.password)}>
 				<View style={styles.header} key={cnt++}>
 					<Text style={styles.head}
 						style={styles.fheader}>
@@ -120,8 +139,8 @@ else{
 			)}
 		/>
 	
-		);
-	}}
+		);}
+	}
 }
 const styles = StyleSheet.create({
 	head: {

@@ -51,11 +51,13 @@ export default class DrawerHeader extends React.Component {
 
 				<View
 					style={{
-						flexDirection: "row",
+						flexDirection: "column",
 						backgroundColor: "#d9d9d9",	
-						paddingVertical: 40,
-						paddingLeft: 25,
-						paddingTop: StatusBar.currentHeight + 20,
+						paddingVertical: 20,
+						paddingHorizontal: 1,
+						// paddingVertical: 40,
+						// paddingLeft: 25,
+						// paddingTop: StatusBar.currentHeight + 20,
 						alignItems: "center",
 					}}
 				>
@@ -69,8 +71,9 @@ export default class DrawerHeader extends React.Component {
 						<Text
 							style={{
 								color: "black",
-								paddingLeft: 15,
+								paddingLeft: 5,
 								fontSize: 16,
+								paddingTop: 10,
 							}}
 						>
 							{mainData.TechnicianName}

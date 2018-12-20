@@ -81,9 +81,6 @@ export default class serviceOrder extends React.Component {
     let techId=mData.mainData.TechnicianId;
     let UserName=mData.mainData.TechnicianCode;
     let password=pass.password;
-    console.log("serviceOrderID:.........."+sorderId);
-    console.log(mData);
-    console.log(password);
     this.setState({
       techId:sorderId
     })
