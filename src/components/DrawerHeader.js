@@ -66,19 +66,21 @@ export default class DrawerHeader extends React.Component {
 						source={require("./Images/Technician.png")}
 						style={{ width: 80, height: 80, borderRadius: 40 }}
 					/>
-
+					
+					<TouchableOpacity onPress={()=>this.props.navigation.navigate("TechnicianProfile")}>
 					<View>
 						<Text
 							style={{
 								color: "black",
 								paddingLeft: 5,
-								fontSize: 16,
+								fontSize: 20,
 								paddingTop: 10,
 							}}
 						>
 							{mainData.TechnicianName}
 						</Text>
 					</View>
+					</TouchableOpacity>
 				</View>
 
 				<View

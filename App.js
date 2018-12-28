@@ -14,6 +14,7 @@ import serviceOrder from "./src/components/serviceOrder";
 import { SearchBar } from "react-native-elements";
 import { HeaderBackButton } from 'react-navigation';
 import AcceptedByYou from "./src/components/AcceptedByYou";
+import TechnicianProfile from "./src/components/TechnicianProfile";
 import BottomNavigation, {FullTab  } from "react-native-material-bottom-navigation";
 const LOGO_URL = "https://i.imgur.com/BbYaucd.png";
 import {
@@ -55,6 +56,9 @@ const Main= StackNavigator(
 	
 		ViewAvailable: {
 			screen: ViewAvailable
+		},
+		TechnicianProfile: {
+			screen:TechnicianProfile
 		}
 	},
 	
